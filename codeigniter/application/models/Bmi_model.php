@@ -1,0 +1,23 @@
+<?php
+class Bmi_model extends CI_Model {
+    public $berat; /** dalam kg*/
+    public $tinggi; /** dalam cm */
+
+    public function nilaiBMI(){    
+        $tinggi_meter = $this->tinggi / 100;
+        $bmi = round($this->berat / pow($tinggi_meter,2),2);
+        return $bmi;
+    }
+
+    public function statusBMI(){
+        if ($this->nilaiBMI() < 18.5){
+            return "Kekurangan Berat Badan";
+        }else if($this->nilaiBMI() < 25.0){
+            return "Normal (Ideal)";
+        }else if($this->nilaiBMI() < 30.0){
+            return "Kelebihan Berat Badan";
+        }else{
+            return "Kegemukan (Obesitas)";
+        }
+    }
+}
